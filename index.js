@@ -75,14 +75,14 @@ function Trumpet(runner) {
   });
 
   runner.on('fail', function(test) {
-    console.log(trumpet);
-    sfx.play(__dirname + '/sound.m4a');
     cursor.CR();
+    sfx.play(__dirname + '/sound.m4a');
     console.log(indent() + color('fail', '  %d) %s'), ++n, test.title);
   });
 
   runner.on('end', function() {
-    return this.epilogue();
+    this.stats.failures && console.log(trumpet);
+    this.epilogue();
   }.bind(self));
 }
 

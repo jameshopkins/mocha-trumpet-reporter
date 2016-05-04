@@ -3,6 +3,7 @@
 */
 
 var fs = require('fs');
+var sfx = require('sfx');
 
 var Base = require('mocha/lib/reporters/base');
 var inherits = require('mocha/lib/utils').inherits;
@@ -74,12 +75,13 @@ function Trumpet(runner) {
   });
 
   runner.on('fail', function(test) {
+    console.log(trumpet);
+    sfx.play(__dirname + '/sound.m4a');
     cursor.CR();
     console.log(indent() + color('fail', '  %d) %s'), ++n, test.title);
   });
 
   runner.on('end', function() {
-    console.log(trumpet);
     return this.epilogue();
   }.bind(self));
 }

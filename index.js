@@ -70,6 +70,7 @@ function Trumpet(runner) {
         + color('pass', ' %s')
         + color(test.speed, ' (%dms)');
       cursor.CR();
+      sfx.play(__dirname + '/success.m4a');
       console.log(fmt, test.title, test.duration);
     }
   });

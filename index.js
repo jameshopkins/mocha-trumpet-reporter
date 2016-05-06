@@ -11,6 +11,7 @@ var color = Base.color;
 var cursor = Base.cursor;
 
 var trumpet = fs.readFileSync(__dirname + '/trumpet.txt', 'utf-8');
+var microwave = fs.readFileSync(__dirname + '/microwave.txt', 'utf-8');
 
 /**
  * Expose `Spec` w/ a trumpet.
@@ -49,6 +50,7 @@ function Trumpet(runner) {
     if (indents === 1) {
       console.log();
     }
+    !this.stats.failures ? sfx.play(__dirname + '/success.m4a') : null;
   });
 
   runner.on('pending', function(test) {
@@ -70,7 +72,6 @@ function Trumpet(runner) {
         + color('pass', ' %s')
         + color(test.speed, ' (%dms)');
       cursor.CR();
-      sfx.play(__dirname + '/success.m4a');
       console.log(fmt, test.title, test.duration);
     }
   });
@@ -82,7 +83,7 @@ function Trumpet(runner) {
   });
 
   runner.on('end', function() {
-    this.stats.failures && console.log(trumpet);
+    this.stats.failures ? console.log(trumpet) : console.log(microwave);
     this.epilogue();
   }.bind(self));
 }

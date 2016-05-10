@@ -78,7 +78,7 @@ function Trumpet(runner) {
 
   runner.on('fail', function(test) {
     cursor.CR();
-    sfx.play(__dirname + '/sound.m4a');
+    sfx.play(__dirname + '/sound.m4a', 20);
     console.log(indent() + color('fail', '  %d) %s'), ++n, test.title);
   });
 
